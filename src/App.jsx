@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "./auth/authSlice"; // Adjust the import path
+
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home";
@@ -11,6 +14,16 @@ import Topup from "./pages/Service/Topup";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
+  const dispatch = useDispatch();
+  const { token, profile } = useSelector((state) => state.auth);
+
+  // Fetch the profile when the token changes
+  useEffect(() => {
+    if (token && !profile) {
+      dispatch(fetchProfile());
+    }
+  }, [token, dispatch, profile]);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -38,7 +51,7 @@ function App() {
             }
           />
           <Route
-            path="/payment"
+            path="/payment/:service_code"
             element={
               <ProtectedRoute>
                 <Payment />
