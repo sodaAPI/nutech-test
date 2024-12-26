@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginUser } from "../../auth/authSlice";
+import { loginUser, fetchProfile } from "../../auth/authSlice";
 import LoginAsset from "../../assets/LoginAsset.png";
 import Logo from "../../assets/Logo.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
@@ -31,6 +31,7 @@ export default function Login() {
 
     if (loginUser.fulfilled.match(resultAction)) {
       toast.success("Login Successful!");
+      await dispatch(fetchProfile()); // Fetch user profile data
       navigate("/home");
     } else {
       toast.error(resultAction.payload || "Login failed. Please try again.");
@@ -53,8 +54,7 @@ export default function Login() {
               <span
                 className={`absolute inset-y-0 left-0 flex items-center pl-4 ${
                   email ? "text-black" : "text-gray-300"
-                }`}
-              >
+                }`}>
                 @
               </span>
               <input
@@ -72,8 +72,7 @@ export default function Login() {
               <span
                 className={`absolute inset-y-0 left-0 flex items-center pl-4 ${
                   password ? "text-black" : "text-gray-300"
-                }`}
-              >
+                }`}>
                 <MdOutlineLock />
               </span>
               <input
@@ -101,8 +100,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="text-[16px] font-semibold rounded-[4px] bg-[#F82C14] h-[48px] text-white w-full"
-            >
+              className="text-[16px] font-semibold rounded-[4px] bg-[#F82C14] h-[48px] text-white w-full">
               Masuk
             </button>
           </form>
