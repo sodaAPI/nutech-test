@@ -3,7 +3,7 @@ import Saldo from "../components/Utils/Saldo";
 import Welcome from "../components/Utils/Welcome";
 import Navbar from "../components/Utils/Navbar";
 import Services from "../components/Home/Services";
-import CarouselServices from "../components/Home/CarouselServices";
+import CarouselServices from "../components/Home/CarouselPromo";
 
 export default function Home() {
   return (
