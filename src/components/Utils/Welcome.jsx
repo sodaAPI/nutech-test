@@ -5,10 +5,9 @@ import Avatar from "../../assets/ProfilePhoto.png";
 export default function Welcome() {
   const { profile } = useSelector((state) => state.auth);
 
-  const firstName = profile?.first_name || "Guest";
+  const firstName = profile?.first_name || "Undefined";
   const lastName = profile?.last_name || "";
 
-  // Fallback to default Avatar if profile_image is null or matches the placeholder
   const profileImage =
     profile?.profile_image ===
     "https://minio.nutech-integrasi.com/take-home-test/null"
