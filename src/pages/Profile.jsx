@@ -5,15 +5,18 @@ import { FaRegUser } from "react-icons/fa6";
 import { FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logout } from "../auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [email, setEmail] = useState("");
   const [namaDepan, setNamaDepan] = useState("");
   const [namaBelakang, setNamaBelakang] = useState("");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/login");
   };
 
   const [isEditState, setEditState] = useState(false);
@@ -53,6 +56,7 @@ export default function Profile() {
                     min="0"
                     className="px-3 py-2 border border-gray-300 rounded-[4px] pl-10 w-full h-[50px]"
                     placeholder="masukan email anda"
+                    onChange={(event) => setEmail(event.target.value)}
                     type="email"
                     required
                     autoFocus
@@ -74,6 +78,7 @@ export default function Profile() {
                     min="0"
                     className="px-3 py-2 border border-gray-300 rounded-[4px] pl-10 w-full h-[50px]"
                     placeholder="masukan nama depan anda"
+                    onChange={(event) => setNamaDepan(event.target.value)}
                     type="name"
                     required
                     autoFocus
@@ -95,6 +100,7 @@ export default function Profile() {
                     min="0"
                     className="px-3 py-2 border border-gray-300 rounded-[4px] pl-10 w-full h-[50px]"
                     placeholder="masukan nama belakang anda"
+                    onChange={(event) => setNamaBelakang(event.target.value)}
                     type="name"
                     required
                     autoFocus
